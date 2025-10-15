@@ -4,7 +4,7 @@ Application form GI members.
 
 ## Download APK
 
-[Application](blob:https://github.com/1d7b8d3f-8e46-4632-b375-72e4bf17aef2)
+[Application](App-GI.zip)
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
