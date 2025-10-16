@@ -108,54 +108,69 @@ class NavDrawer extends StatelessWidget {
 
    @override
    Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Text(
-              'Paramètres',
-              style: TextStyle(
-                height: 7,
-                color: Colors.blue.shade900,
-                fontSize: 35,
-                fontWeight: FontWeight.bold
-              ),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white
-            )),
-            ListTile(
-              tileColor: Colors.blue.shade900,
-              leading: Icon(
-                Icons.exit_to_app,
-                color: Colors.white
-              ),
-              title: Text(
-                'Log out',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () => {
-                Navigator.of(context)
-                .pushAndRemoveUntil(
-                  CupertinoPageRoute(
-                    builder: (context) => LoginScreen()
-                  ),
-                  (_) => false,
-                )
-              },
-            ),
-            Container(
-              height: 395,
-              padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
-              alignment: Alignment.bottomCenter,
-              decoration: BoxDecoration(color: Colors.blue.shade900),
-            ),
-        ],
-      ),
-    );
+     return Drawer(
+       child: ListView(
+         padding: EdgeInsets.zero,
+         children: <Widget>[
+           DrawerHeader(
+             decoration: BoxDecoration(
+                 color: Colors.white
+             ),
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                 Container(
+                   decoration: BoxDecoration(
+                       borderRadius: BorderRadius.circular(15),
+                       color: Colors.white
+                   ),
+                   height: 60,
+                   width: 60,
+                   child: Image.asset('assets/images/ic_launcher-playstore.png'),
+                 ),
+                 SizedBox(height: 10),
+                 Text(
+                   'Paramètres',
+                   style: TextStyle(
+                       color: Colors.blue.shade900,
+                       fontSize: 35,
+                       fontWeight: FontWeight.bold
+                   ),
+                 ),
+               ],
+             ),
+           ),
+           ListTile(
+             tileColor: Colors.blue.shade900,
+             leading: Icon(
+                 Icons.exit_to_app,
+                 color: Colors.white
+             ),
+             title: Text(
+               'Log out',
+               style: TextStyle(
+                 color: Colors.white,
+               ),
+             ),
+             onTap: () => {
+               Navigator.of(context)
+                   .pushAndRemoveUntil(
+                 CupertinoPageRoute(
+                     builder: (context) => LoginScreen()
+                 ),
+                     (_) => false,
+               )
+             },
+           ),
+           Container(
+             height: 395,
+             padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+             alignment: Alignment.bottomCenter,
+             decoration: BoxDecoration(color: Colors.blue.shade900),
+           ),
+         ],
+       ),
+     );
    }
 }
 
