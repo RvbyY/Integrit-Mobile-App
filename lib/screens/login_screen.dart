@@ -1,4 +1,5 @@
 import 'package:auth_demo/auth_gate.dart';
+import 'package:auth_demo/screens/forgot_password.dart';
 import 'package:auth_demo/screens/register_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +83,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   ]
                 ),
               ),
+              RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(text: "Mot de passe oublié", style: TextStyle(color: Colors.blue.shade900, decoration: TextDecoration.underline), recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                        TextStyle(color: Colors.black);
+                        Navigator.push(
+                          context, MaterialPageRoute(
+                              builder: (_) => const ForgotScreen(),
+                          ),
+                        );
+                        })
+                    ]
+                  )),
               Spacer(flex: 2),
               Material(
                 elevation: 5,
@@ -98,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+
               Spacer(flex: 70),
             ],
           )
