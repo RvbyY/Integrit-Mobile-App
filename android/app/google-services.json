@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "12847061445",
-    "project_id": "integr-it-app-7a5d3",
-    "storage_bucket": "integr-it-app-7a5d3.firebasestorage.app"
+    "project_number": "391736139833",
+    "project_id": "integr-it-app-251d4",
+    "storage_bucket": "integr-it-app-251d4.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:12847061445:android:63593bbcf2ac92f55913ac",
+        "mobilesdk_app_id": "1:391736139833:android:1b7a799dd7c24e0310ede8",
         "android_client_info": {
           "package_name": "com.example.auth_demo"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA_uMgr7bNdaCp-IaqYtsMTApwQ907aVNs"
+          "current_key": "AIzaSyAjryWBpflShgCCdLCO5r-gmcwtlYMbcs0"
         }
       ],
       "services": {
