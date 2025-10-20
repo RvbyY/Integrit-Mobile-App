@@ -1,30 +1,31 @@
 name: iOS-ipa-build
 
-on: 
+on:
   workflow_dispatch:
 
 jobs:
   build-ios:
-    name: 🎉 iOS Build
+    name: iOS Build
     runs-on: macos-latest
     
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
       
-      - uses: subosito/flutter-action@v2
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: stable
+          architecture: x64
       
-      - name: Install dependencies
+      - name: Check files
         run: |
-          flutter pub get
-          cd ios && pod install && cd ..
+          pwd
+          ls -la
+          test -f pubspec.yaml && echo "Found pubspec.yaml" || echo "Missing pubspec.yaml"
       
-      - name: Build IPA
-        run: flutter build ipa --release --no-codesign --export-options-plist=ios/ExportOptions.plist
+      - name: Get dependencies
+        run: flutter pub get
       
-      - name: Upload IPA
-        uses: actions/upload-artifact@v3
-        with:
-          name: ios-app
-          path: build/ios/ipa/*.ipa
+      - name: Build iOS
+        run: flutter build ios --release --no-codesign
