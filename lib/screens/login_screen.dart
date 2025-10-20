@@ -113,7 +113,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-
               Spacer(flex: 70),
             ],
           )

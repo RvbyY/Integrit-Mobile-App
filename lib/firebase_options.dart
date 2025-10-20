@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA_uMgr7bNdaCp-IaqYtsMTApwQ907aVNs',
-    appId: '1:12847061445:android:63593bbcf2ac92f55913ac',
-    messagingSenderId: '12847061445',
-    projectId: 'integr-it-app-7a5d3',
-    storageBucket: 'integr-it-app-7a5d3.firebasestorage.app',
+    apiKey: 'AIzaSyAjryWBpflShgCCdLCO5r-gmcwtlYMbcs0',
+    appId: '1:391736139833:android:1b7a799dd7c24e0310ede8',
+    messagingSenderId: '391736139833',
+    projectId: 'integr-it-app-251d4',
+    storageBucket: 'integr-it-app-251d4.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAR540bxEsXhlK3SxeoeP_uS2Suy5_rT_k',
-    appId: '1:12847061445:ios:890150b87675b1d55913ac',
-    messagingSenderId: '12847061445',
-    projectId: 'integr-it-app-7a5d3',
-    storageBucket: 'integr-it-app-7a5d3.firebasestorage.app',
+    apiKey: 'AIzaSyC6H-cQ5JwAmz8AD8BpWCgltaUdPUUhZ6k',
+    appId: '1:391736139833:ios:8967ed570cc50fe510ede8',
+    messagingSenderId: '391736139833',
+    projectId: 'integr-it-app-251d4',
+    storageBucket: 'integr-it-app-251d4.firebasestorage.app',
     iosBundleId: 'com.example.authDemo',
   );
+
 }

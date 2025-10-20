@@ -1,7 +1,9 @@
 import 'package:auth_demo/screens/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:auth_demo/auth_gate.dart';
 
 class Paths {
   static const String entreePath = 'https://forms.office.com/Pages/ResponsePage.aspx?id=RBmyLoXbRECIcbwHK8oD_wuwxaPYwv1MgdGsdsAr3W1UNURSOVRXQ1FXVzBWVDBZWFdRQzE2R1pYMS4u';
@@ -15,7 +17,7 @@ class IntegritApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(  // ✅ Just return Scaffold
-      drawer: const NavDrawer(),
+      drawer: NavDrawer(),
       body: const HeaderTitle(),
     );
   }
@@ -104,7 +106,8 @@ class HeaderTitle extends StatelessWidget {
 }
 
 class NavDrawer extends StatelessWidget {
-  const NavDrawer({super.key});
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  NavDrawer({super.key});
 
    @override
    Widget build(BuildContext context) {
@@ -128,7 +131,15 @@ class NavDrawer extends StatelessWidget {
                    width: 60,
                    child: Image.asset('assets/images/ic_launcher-playstore.png'),
                  ),
-                 SizedBox(height: 10),
+                 Text(
+                  '${auth.currentUser?.email}',
+                   style: TextStyle(
+                     color: Colors.black,
+                     fontSize: 10,
+                     fontWeight: FontWeight.bold,
+                   ),
+                 ),
+                 SizedBox(height: 8),
                  Text(
                    'Paramètres',
                    style: TextStyle(
