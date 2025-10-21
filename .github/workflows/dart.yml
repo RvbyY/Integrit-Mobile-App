@@ -3,28 +3,7 @@ name: App-build
 on:
   workflow_dispatch:
 
-jobs:
-  build-android:
-    name: Android Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          architecture: x64
-      - run: flutter build apk --release
-      
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/app/outputs/flutter-apk/app-release.apk
-          tag: v1.0
-          overwrite: true
-          body: "This is first release"  
-
+jobs:  
           
   build-ios:
     name: 🎉 iOS Build
@@ -43,7 +22,9 @@ jobs:
         working-directory: ios
 
       - run: flutter build ios --release --no-codesign
-
+      - name: Build APK
+        run: flutter build apk --release
+      
       - run: mkdir Payload
         working-directory: build/ios/iphoneos
 
@@ -57,8 +38,8 @@ jobs:
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/ios/iphoneos/FlutterIpaExport.ipa
+          repo_token: ${{ secrets.GITHUB_TOKEN }} 
+          path: build/app/outputs/flutter-apk/app-release.apk | build/ios/iphoneos/FlutterIpaExport.ipa
           tag: v1.0
           overwrite: true
           body: "This is first release"
