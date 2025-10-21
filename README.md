@@ -2,7 +2,7 @@
 
 Application form GI members.
 
-## Download APK
+## Download App (APK and IPA)
 
 [Application](https://github.com/RvbyY/Integrit-Mobile-App/releases/tag/v1.0)
 
