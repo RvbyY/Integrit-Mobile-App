@@ -1,6 +1,6 @@
 # Groupe Integr'IT APP
 
-Application form GI members.
+Application for Groupe Integr'IT members.
 
 ## Download App (APK and IPA)
 
