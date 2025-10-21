@@ -15,7 +15,17 @@ jobs:
           channel: 'stable'
           architecture: x64
       - run: flutter build apk --release
-  
+      
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/app/outputs/flutter-apk/app-release.apk
+          tag: v1.0
+          overwrite: true
+          body: "This is first release"  
+
+          
   build-ios:
     name: 🎉 iOS Build
     runs-on: macos-latest
