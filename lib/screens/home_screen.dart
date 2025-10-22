@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:auth_demo/auth_gate.dart';
 
 class Paths {
   static const String entreePath = 'https://forms.office.com/Pages/ResponsePage.aspx?id=RBmyLoXbRECIcbwHK8oD_wuwxaPYwv1MgdGsdsAr3W1UNURSOVRXQ1FXVzBWVDBZWFdRQzE2R1pYMS4u';
