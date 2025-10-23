@@ -1,8 +1,10 @@
 import 'package:auth_demo/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:web/web.dart' as web;
 
 class Paths {
   static const String entreePath = 'https://forms.office.com/Pages/ResponsePage.aspx?id=RBmyLoXbRECIcbwHK8oD_wuwxaPYwv1MgdGsdsAr3W1UNURSOVRXQ1FXVzBWVDBZWFdRQzE2R1pYMS4u';
@@ -15,7 +17,7 @@ class IntegritApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(  // ✅ Just return Scaffold
+    return Scaffold(
       drawer: NavDrawer(),
       body: const HeaderTitle(),
     );
@@ -225,12 +227,16 @@ class ButtonGroups extends StatelessWidget {
       String extension, String urlPaths, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => WebViewApp(url: urlPaths, title: filename),
-          ),
-        );
+        if (kIsWeb) {
+          web.window.open(urlPaths, '_blank');
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => WebViewApp(url: urlPaths, title: filename),
+            ),
+          );
+        }
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -278,7 +284,6 @@ class WebViewApp extends StatefulWidget {
   @override
   State<WebViewApp> createState() => _WebViewAppState();
 }
-
 
 class _WebViewAppState extends State<WebViewApp> {
   late final WebViewController controller;
