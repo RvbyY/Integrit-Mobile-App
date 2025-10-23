@@ -1,1 +1,16 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"integr-it-app-251d4","appId":"1:391736139833:android:1b7a799dd7c24e0310ede8","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"integr-it-app-251d4","configurations":{"android":"1:391736139833:android:1b7a799dd7c24e0310ede8","ios":"1:391736139833:ios:8967ed570cc50fe510ede8"}}}}}}
+{
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
