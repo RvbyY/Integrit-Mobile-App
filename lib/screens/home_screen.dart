@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:web/web.dart' as web;
+import 'package:auth_demo/web_helper_stub.dart'
+    if (dart.library.html) 'web_helper_web.dart' as web_helper;
 
 class Paths {
   static const String entreePath = 'https://forms.office.com/Pages/ResponsePage.aspx?id=RBmyLoXbRECIcbwHK8oD_wuwxaPYwv1MgdGsdsAr3W1UNURSOVRXQ1FXVzBWVDBZWFdRQzE2R1pYMS4u';
@@ -228,7 +229,7 @@ class ButtonGroups extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (kIsWeb) {
-          web.window.open(urlPaths, '_blank');
+          web_helper.openUrl(urlPaths);
         } else {
           Navigator.push(
             context,
