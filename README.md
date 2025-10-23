@@ -1,10 +1,15 @@
-# Groupe Integr'IT APP
+# auth_demo
 
-Application for Groupe Integr'IT members.
+A new Flutter project.
 
-## Download App (APK and IPA)
+## Getting Started
 
-[Application](https://github.com/RvbyY/Integrit-Mobile-App/releases/tag/v1.0)
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
