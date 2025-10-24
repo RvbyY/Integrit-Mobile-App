@@ -40,7 +40,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/app/outputs/flutter-apk/app-release.apk
-          tag: v1.*
+          tag: v1.0.0+0
           overwrite: true
           body: "This is Groupe Integr'IT App release\nWebsite URL:https://integr-it-app-251d4.web.app"
 
@@ -49,5 +49,5 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/ios/iphoneos/FlutterIpaExport.ipa
-          tag: v1.*
+          tag: v1.0.0+0
           overwrite: true
