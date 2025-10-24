@@ -56,7 +56,8 @@ jobs:
           tag: ${{ env.TAG_NAME }}
           overwrite: true
           body: |
-              This is Groupe Integr'IT App release\nVersion: 1.0.${{ env.CURRENT_VERSION }}
+              This is Groupe Integr'IT App release
+              Version: 1.0.${{ env.CURRENT_VERSION }}
               Website URL:https://integr-it-app-251d4.web.app
 
       - name: Upload IPA to release
