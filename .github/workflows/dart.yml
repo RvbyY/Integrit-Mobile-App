@@ -15,8 +15,19 @@ jobs:
         with:
           channel: 'stable'
           architecture: x64
-      - run: flutter pub get
+          
+      - name: Set new version of app
+        env:
+           CURRENT_VERSION: ${{ secrets.APP_VERSION }}
+        run: |
+           CURRENT_VERSION=$((CURRENT_VERSION + 1))
+           CODE_VERSION=$((CURRENT_VERSION + 1))
+           echo $CURRENT_VERSION
+           sed -i "/version:/c version: 1.0.$CURRENT_VERSION+$CODE_VERSION" pubspec.yaml
+           echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
+           echo "TAG_NAME=v1.0.$CURRENT_VERSION" >> $GITHUB_ENV
       
+      - run: flutter pub get
 
       - run: pod repo update
         working-directory: ios
@@ -35,29 +46,24 @@ jobs:
         run: zip -qq -r -9 FlutterIpaExport.ipa Payload
         working-directory: build/ios/iphoneos
 
-      - name: Set new version of app
-        env:
-           CURRENT_VERSION: ${{ secrets.APP_VERSION }}
-        run: |
-           CURRENT_VERSION=$((CURRENT_VERSION + 1))
-           CODE_VERSION=$((CURRENT_VERSION + 1))
-           echo $CURRENT_VERSION
-           sed -i "/version:/c version: 1.0.$CURRENT_VERSION+$CODE_VERSION" pubspec.yaml
-           echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
      
       - name: Upload APK to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/app/outputs/flutter-apk/app-release.apk
-          tag: $CURRENT_VERSION
+          asset_name: app-release-${{ env.TAG_NAME }}.apk
+          tag: ${{ env.TAG_NAME }}
           overwrite: true
-          body: "This is Groupe Integr'IT App release\nWebsite URL:https://integr-it-app-251d4.web.app"
+          body: |
+              This is Groupe Integr'IT App release\nVersion: 1.0.${{ env.CURRENT_VERSION }}
+              Website URL:https://integr-it-app-251d4.web.app
 
       - name: Upload IPA to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/ios/iphoneos/FlutterIpaExport.ipa
-          tag: $CURRENT_VERSION
+          asset_name: FlutterIpaExport-${{ env.TAG_NAME }}.ipa
+          tag: ${{ env.TAG_NAME }}
           overwrite: true
