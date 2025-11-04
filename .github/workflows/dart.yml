@@ -1,16 +1,14 @@
 name: App-build
-
 on:
   workflow_dispatch:
 
 jobs:  
-          
   build-ios:
-    name: 🎉 App Build
+    name: 🎉 iOS App Build & Deploy
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-
+      
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
@@ -27,26 +25,74 @@ jobs:
            echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
            echo "TAG_NAME=v1.0.$CURRENT_VERSION" >> $GITHUB_ENV
       
+      - name: Install Flutter dependencies
+        run: flutter pub get
+      
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+          working-directory: ios
+      
+      - name: Install Fastlane
+        run: |
+          cd ios
+          bundle install
+      
+      - name: Build and Deploy to TestFlight
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+        run: |
+          cd ios
+          fastlane beta
+      
+      - name: Upload IPA to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ios/build/Runner.ipa
+          asset_name: FlutterIpaExport-${{ env.TAG_NAME }}.ipa
+          tag: ${{ env.TAG_NAME }}
+          overwrite: true
+          body: |
+              This is Groupe Integr'IT App release
+              Version: 1.0.${{ env.CURRENT_VERSION }}
+              Website URL: https://integr-it-app-251d4.web.app
+
+  build-android:
+    name: 🤖 Android App Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          
+      - name: Set new version of app
+        env:
+           CURRENT_VERSION: ${{ secrets.APP_VERSION }}
+        run: |
+           CURRENT_VERSION=$((CURRENT_VERSION + 1))
+           CODE_VERSION=$((CURRENT_VERSION + 1))
+           echo "New version: 1.0.$CURRENT_VERSION+$CODE_VERSION"
+           sed -i "s/^version:.*/version: 1.0.$CURRENT_VERSION+$CODE_VERSION/" pubspec.yaml
+           echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
+           echo "TAG_NAME=v1.0.$CURRENT_VERSION" >> $GITHUB_ENV
+      
       - run: flutter pub get
-
-      - run: pod repo update
-        working-directory: ios
-
-      - run: flutter build ios --release --no-codesign
+      
       - name: Build APK
         run: flutter build apk --release
       
-      - run: mkdir Payload
-        working-directory: build/ios/iphoneos
-
-      - run: mv Runner.app/ Payload
-        working-directory: build/ios/iphoneos
-
-      - name: Zip output
-        run: zip -qq -r -9 FlutterIpaExport.ipa Payload
-        working-directory: build/ios/iphoneos
-
-     
       - name: Upload APK to release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -58,13 +104,4 @@ jobs:
           body: |
               This is Groupe Integr'IT App release
               Version: 1.0.${{ env.CURRENT_VERSION }}
-              Website URL:https://integr-it-app-251d4.web.app
-
-      - name: Upload IPA to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/ios/iphoneos/FlutterIpaExport.ipa
-          asset_name: FlutterIpaExport-${{ env.TAG_NAME }}.ipa
-          tag: ${{ env.TAG_NAME }}
-          overwrite: true
+              Website URL: https://integr-it-app-251d4.web.app
