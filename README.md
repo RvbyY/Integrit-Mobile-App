@@ -1,5 +1,4 @@
-# auth_demo
-
+# Groupe Integr'iT App
 A new Flutter project.
 
 ## Getting Started
