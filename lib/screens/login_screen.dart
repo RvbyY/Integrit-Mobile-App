@@ -78,8 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             builder: (_) => const RegisterScreen(),
                           ),
                         );
-                       },
-                    )
+                       }
+                    ),
                   ]
                 ),
               ),

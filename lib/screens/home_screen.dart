@@ -1,3 +1,4 @@
+import 'package:auth_demo/screens/delete_screen.dart';
 import 'package:auth_demo/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -175,6 +176,27 @@ class NavDrawer extends StatelessWidget {
                )
              },
            ),
+           ListTile(
+            tileColor: Colors.blue.shade900,
+            leading: Icon(
+              Icons.account_circle,
+              color: Colors.white,
+            ),
+            title: Text(
+              'Supprimer le compte',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            onTap: () => {
+              Navigator.of(context)
+                .push(
+                  CupertinoPageRoute(
+                    builder: (context) => DeleteScreen()
+                  ),
+                )
+            },
+           ),
            Container(
              height: 395,
              padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
@@ -319,4 +341,4 @@ class _WebViewAppState extends State<WebViewApp> {
         ),
     );
   }
-}
+} 
