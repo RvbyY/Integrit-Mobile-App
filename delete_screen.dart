@@ -39,7 +39,17 @@ class _DeleteScreenState extends State<DeleteScreen> {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-            appBar: AppBar(title: Text('Suprimer mon compte'), titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),backgroundColor: Colors.blue.shade900),
+            appBar: AppBar(
+                title: Text(
+                    'Suprimer mon compte'
+                ),
+                    titleTextStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold
+                    ),
+                    backgroundColor: Colors.blue.shade900
+            ),
             body: Center(
                 child: Material(
                     elevation: 5,
