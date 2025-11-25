@@ -45,6 +45,8 @@ dev_dependencies:
   flutter_side_menu: ^0.5.41
   web: ^1.1.1
   build_runner: ^2.10.0
+  flutter_lints: ^6.0.0
+  camera: ^0.11.3
 
 flutter_launcher_icons:
   android: "launcher_icon"
