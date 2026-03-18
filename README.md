@@ -32,7 +32,7 @@ $ flutter run lib/main.dart
 I used [Firebase](https://firebase.google.com/) to manage auth, hosting and account managements. <br>
 It's a great tool provide by google. it works fine with flutter, react and react native projects. <br>
 <br>
-The CLI looks like that:
+The CLI looks like that: <br> <br>
 ![alt text](https://raw.githubusercontent.com/RvbyY/Integrit-Mobile-App/refs/heads/main/appImages/firebase.png)
 ## Download
 if you're a non-developper but you want to see how does it works (you cannot use it if you aren't a GI member) <br>
